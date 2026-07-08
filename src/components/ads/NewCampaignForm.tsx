@@ -20,7 +20,7 @@ export function NewCampaignForm({
     return (
       <button
         onClick={() => setOpen(true)}
-        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+        className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
       >
         + Nova campanha
       </button>
@@ -42,16 +42,16 @@ export function NewCampaignForm({
           }
         });
       }}
-      className="mb-6 flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-5"
+      className="mb-6 flex flex-col gap-3 rounded-2xl border border-stone-200 bg-white p-5"
     >
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Cliente</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Cliente</label>
         <select
           name="client_id"
           required
           value={selectedClient}
           onChange={(e) => setSelectedClient(e.target.value)}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         >
           <option value="" disabled>
             Selecione
@@ -65,8 +65,8 @@ export function NewCampaignForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Rede</label>
-        <select name="network" className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm">
+        <label className="mb-1 block text-xs font-medium text-stone-500">Rede</label>
+        <select name="network" className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
           <option value="instagram">Instagram</option>
           <option value="facebook">Facebook</option>
         </select>
@@ -74,12 +74,12 @@ export function NewCampaignForm({
 
       {clientContentItems.length > 0 && (
         <div>
-          <label className="mb-1 block text-xs font-medium text-neutral-500">
+          <label className="mb-1 block text-xs font-medium text-stone-500">
             Post para impulsionar (opcional)
           </label>
           <select
             name="content_item_id"
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
           >
             <option value="">Nenhum — campanha avulsa</option>
             {clientContentItems.map((c) => (
@@ -92,23 +92,23 @@ export function NewCampaignForm({
       )}
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Objetivo</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Objetivo</label>
         <input
           name="objective"
           placeholder="Ex: mais seguidores, tráfego pro site..."
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Orçamento (R$)</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Orçamento (R$)</label>
         <input
           type="number"
           name="budget"
           min="1"
           step="0.01"
           required
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
@@ -118,14 +118,14 @@ export function NewCampaignForm({
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
           {isPending ? "Salvando..." : "Criar rascunho"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-lg px-4 py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100"
+          className="rounded-lg px-4 py-2 text-sm font-medium text-stone-500 hover:bg-stone-100"
         >
           Cancelar
         </button>

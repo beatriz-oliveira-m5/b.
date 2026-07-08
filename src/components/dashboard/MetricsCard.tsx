@@ -17,7 +17,7 @@ export function MetricsCard({
   const aboveBenchmark = benchmarkRate != null && engagementRate >= benchmarkRate;
 
   return (
-    <div className="rounded-2xl border border-neutral-200 bg-white p-4">
+    <div className="rounded-2xl border border-stone-200 bg-white p-4">
       <div className="mb-3 flex items-center justify-between">
         <NetworkBadge network={network} />
         {source === "mock" && (
@@ -27,12 +27,12 @@ export function MetricsCard({
         )}
       </div>
 
-      <p className="text-2xl font-semibold text-neutral-900">{reach.toLocaleString("pt-BR")}</p>
-      <p className="mb-3 text-xs text-neutral-500">alcance nos últimos 30 dias</p>
+      <p className="text-2xl font-semibold text-stone-900">{reach.toLocaleString("pt-BR")}</p>
+      <p className="mb-3 text-xs text-stone-500">alcance nos últimos 30 dias</p>
 
       <div className="flex items-center gap-2 text-sm">
-        <span className="font-medium text-neutral-800">{engagementRate.toFixed(2)}%</span>
-        <span className="text-neutral-400">engajamento</span>
+        <span className="font-medium text-stone-800">{engagementRate.toFixed(2)}%</span>
+        <span className="text-stone-400">engajamento</span>
         {benchmarkRate != null && (
           <span className={aboveBenchmark ? "text-emerald-600" : "text-red-500"}>
             {aboveBenchmark ? "▲" : "▼"} benchmark {benchmarkRate}%

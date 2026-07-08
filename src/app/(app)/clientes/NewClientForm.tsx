@@ -3,7 +3,7 @@
 import { useRef, useState, useTransition } from "react";
 import { createClientRecord } from "@/lib/actions/clients";
 
-const COLOR_OPTIONS = ["#6366f1", "#ec4899", "#10b981", "#f59e0b", "#0ea5e9", "#8b5cf6"];
+const COLOR_OPTIONS = ["#7C5231", "#B5651D", "#8A9A5B", "#C99A3A", "#9C4A4A", "#7A6C5D"];
 
 export function NewClientForm() {
   const [open, setOpen] = useState(false);
@@ -16,7 +16,7 @@ export function NewClientForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700"
+        className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-700"
       >
         + Novo cliente
       </button>
@@ -39,7 +39,7 @@ export function NewClientForm() {
           }
         });
       }}
-      className="mb-6 rounded-2xl border border-neutral-200 bg-white p-5"
+      className="mb-6 rounded-2xl border border-stone-200 bg-white p-5"
     >
       <input type="hidden" name="color" value={color} />
       <div className="mb-3 flex gap-3">
@@ -47,7 +47,7 @@ export function NewClientForm() {
           name="name"
           required
           placeholder="Nome do cliente"
-          className="flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-indigo-500"
+          className="flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-brand-500"
         />
       </div>
       <div className="mb-3 flex gap-2">
@@ -57,7 +57,7 @@ export function NewClientForm() {
             key={c}
             onClick={() => setColor(c)}
             className={`h-6 w-6 rounded-full border-2 ${
-              color === c ? "border-neutral-900" : "border-transparent"
+              color === c ? "border-stone-900" : "border-transparent"
             }`}
             style={{ backgroundColor: c }}
             aria-label={`Cor ${c}`}
@@ -68,21 +68,21 @@ export function NewClientForm() {
         name="notes"
         placeholder="Notas (opcional)"
         rows={2}
-        className="mb-3 w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-indigo-500"
+        className="mb-3 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-brand-500"
       />
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-700 disabled:opacity-50"
         >
           {isPending ? "Salvando..." : "Salvar cliente"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-lg px-4 py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100"
+          className="rounded-lg px-4 py-2 text-sm font-medium text-stone-500 hover:bg-stone-100"
         >
           Cancelar
         </button>

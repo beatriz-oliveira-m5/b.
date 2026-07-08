@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { monthGrid, parseMonthParam, dayKey, monthParam, WEEKDAY_LABELS } from "@/lib/calendar";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { addMonths, format, isSameMonth, subMonths } from "date-fns";
+import { addMonths, format, isSameMonth, isToday, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export default async function CalendarioPage({
@@ -51,10 +51,10 @@ export default async function CalendarioPage({
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-neutral-900 capitalize">
+          <h1 className="text-xl font-semibold text-stone-900 capitalize">
             {format(reference, "MMMM yyyy", { locale: ptBR })}
           </h1>
-          <p className="text-sm text-neutral-500">Calendário de conteúdo de todos os clientes.</p>
+          <p className="text-sm text-stone-500">Calendário de conteúdo de todos os clientes.</p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export default async function CalendarioPage({
             <select
               name="cliente"
               defaultValue={cliente ?? ""}
-              className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm"
+              className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm"
             >
               <option value="">Todos os clientes</option>
               {clients?.map((c) => (
@@ -74,7 +74,7 @@ export default async function CalendarioPage({
             </select>
             <button
               type="submit"
-              className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+              className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
             >
               Filtrar
             </button>
@@ -82,30 +82,30 @@ export default async function CalendarioPage({
 
           <Link
             href={qs(prevMonth)}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+            className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
           >
             ←
           </Link>
           <Link
             href={qs(nextMonth)}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+            className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
           >
             →
           </Link>
           <Link
             href={`/conteudo/novo${cliente ? `?cliente=${cliente}` : ""}`}
-            className="rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded-lg bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
           >
             + Novo post
           </Link>
         </div>
       </div>
 
-      <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+      <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-stone-200 bg-white">
         {WEEKDAY_LABELS.map((label) => (
           <div
             key={label}
-            className="border-b border-neutral-200 bg-neutral-50 px-2 py-2 text-center text-xs font-medium text-neutral-500"
+            className="border-b border-stone-200 bg-brand-50 px-2 py-2 text-center text-xs font-medium text-brand-700"
           >
             {label}
           </div>
@@ -115,15 +115,24 @@ export default async function CalendarioPage({
           const key = dayKey(day);
           const dayItems = itemsByDay.get(key) ?? [];
           const inMonth = isSameMonth(day, reference);
+          const today = isToday(day);
 
           return (
             <div
               key={key}
-              className={`min-h-28 border-b border-r border-neutral-100 p-1.5 last:border-r-0 ${
-                inMonth ? "bg-white" : "bg-neutral-50/50"
+              className={`min-h-28 border-b border-r border-stone-100 p-1.5 last:border-r-0 ${
+                today ? "bg-brand-50/60" : inMonth ? "bg-white" : "bg-stone-50/50"
               }`}
             >
-              <p className={`mb-1 text-xs ${inMonth ? "text-neutral-500" : "text-neutral-300"}`}>
+              <p
+                className={`mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs ${
+                  today
+                    ? "bg-brand-600 font-semibold text-white"
+                    : inMonth
+                      ? "text-stone-500"
+                      : "text-stone-300"
+                }`}
+              >
                 {format(day, "d")}
               </p>
               <div className="flex flex-col gap-1">
@@ -133,14 +142,14 @@ export default async function CalendarioPage({
                     <Link
                       key={item.id}
                       href={`/conteudo/${item.id}`}
-                      className="block rounded-md border border-neutral-200 px-1.5 py-1 text-xs hover:border-neutral-300 hover:shadow-sm"
+                      className="block rounded-md border border-stone-200 px-1.5 py-1 text-xs hover:border-stone-300 hover:shadow-sm"
                     >
                       <span className="flex items-center gap-1">
                         <span
                           className="h-1.5 w-1.5 shrink-0 rounded-full"
                           style={{ backgroundColor: client?.color ?? "#a3a3a3" }}
                         />
-                        <span className="truncate font-medium text-neutral-800">
+                        <span className="truncate font-medium text-stone-800">
                           {item.title}
                         </span>
                       </span>

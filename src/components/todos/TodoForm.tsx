@@ -23,15 +23,15 @@ export function TodoForm({ clients, defaultClientId }: { clients: Client[]; defa
           }
         });
       }}
-      className="mb-6 flex flex-wrap items-end gap-2 rounded-xl border border-neutral-200 bg-white p-4"
+      className="mb-6 flex flex-wrap items-end gap-2 rounded-xl border border-stone-200 bg-white p-4"
     >
       <div className="flex-1 min-w-[160px]">
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Cliente</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Cliente</label>
         <select
           name="client_id"
           required
           defaultValue={defaultClientId ?? ""}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         >
           <option value="" disabled>
             Selecione
@@ -45,28 +45,28 @@ export function TodoForm({ clients, defaultClientId }: { clients: Client[]; defa
       </div>
 
       <div className="flex-[2] min-w-[220px]">
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Tarefa</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Tarefa</label>
         <input
           name="title"
           required
           placeholder="Ex: aprovar artes da campanha"
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">Prazo</label>
+        <label className="mb-1 block text-xs font-medium text-stone-500">Prazo</label>
         <input
           type="date"
           name="due_date"
-          className="rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <button
         type="submit"
         disabled={isPending}
-        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+        className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
       >
         {isPending ? "Salvando..." : "+ Adicionar"}
       </button>

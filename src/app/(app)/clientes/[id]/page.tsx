@@ -29,31 +29,31 @@ export default async function ClienteDetalhePage({
 
   return (
     <div className="max-w-2xl">
-      <Link href="/clientes" className="mb-4 inline-block text-sm text-neutral-500 hover:underline">
+      <Link href="/clientes" className="mb-4 inline-block text-sm text-stone-500 hover:underline">
         ← Voltar para clientes
       </Link>
 
-      <h1 className="mb-1 text-xl font-semibold text-neutral-900">{client.name}</h1>
-      <p className="mb-6 text-sm text-neutral-500">
+      <h1 className="mb-1 text-xl font-semibold text-stone-900">{client.name}</h1>
+      <p className="mb-6 text-sm text-stone-500">
         {pendingTodos ?? 0} tarefa(s) pendente(s) · {upcomingPosts ?? 0} post(s) em andamento
       </p>
 
       <div className="mb-6 flex flex-wrap gap-2">
         <Link
           href={`/calendario?cliente=${id}`}
-          className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+          className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
         >
           Ver calendário
         </Link>
         <Link
           href={`/dashboard?cliente=${id}`}
-          className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+          className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
         >
           Ver relatórios
         </Link>
         <Link
           href={`/conteudo/novo?cliente=${id}`}
-          className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+          className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
         >
           + Novo post
         </Link>

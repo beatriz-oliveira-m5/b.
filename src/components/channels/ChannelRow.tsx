@@ -24,18 +24,18 @@ export function ChannelRow({
       : "Conectado (dados de teste)";
 
   const statusColor = !channel
-    ? "text-neutral-400"
+    ? "text-stone-400"
     : channel.mode === "real"
       ? "text-emerald-600"
       : "text-amber-600";
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-b border-neutral-100 py-3 last:border-0">
-      <span className="w-24 text-sm font-medium text-neutral-800">{NETWORK_LABELS[network]}</span>
+    <div className="flex flex-wrap items-center gap-3 border-b border-stone-100 py-3 last:border-0">
+      <span className="w-24 text-sm font-medium text-stone-800">{NETWORK_LABELS[network]}</span>
       <span className={`w-48 text-xs font-medium ${statusColor}`}>{statusLabel}</span>
 
       {channel && (
-        <span className="text-xs text-neutral-400">{channel.handle}</span>
+        <span className="text-xs text-stone-400">{channel.handle}</span>
       )}
 
       <div className="ml-auto flex items-center gap-2">
@@ -43,13 +43,13 @@ export function ChannelRow({
           <>
             <button
               onClick={() => setShowMockForm(true)}
-              className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium hover:bg-neutral-50"
+              className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium hover:bg-stone-50"
             >
               Conectar com dados de teste
             </button>
             <a
               href={`/api/integrations/${network}/connect?client_id=${clientId}`}
-              className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700"
+              className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700"
             >
               Conectar de verdade
             </a>
@@ -62,7 +62,7 @@ export function ChannelRow({
               value={handle}
               onChange={(e) => setHandle(e.target.value)}
               placeholder="@usuario"
-              className="w-32 rounded-lg border border-neutral-300 px-2 py-1.5 text-xs"
+              className="w-32 rounded-lg border border-stone-300 px-2 py-1.5 text-xs"
             />
             <button
               disabled={isPending}
@@ -78,7 +78,7 @@ export function ChannelRow({
             </button>
             <button
               onClick={() => setShowMockForm(false)}
-              className="text-xs text-neutral-400 hover:text-neutral-600"
+              className="text-xs text-stone-400 hover:text-stone-600"
             >
               cancelar
             </button>
@@ -89,7 +89,7 @@ export function ChannelRow({
           <button
             disabled={isPending}
             onClick={() => startTransition(() => disconnectChannel(channel.id))}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+            className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
           >
             Desconectar
           </button>

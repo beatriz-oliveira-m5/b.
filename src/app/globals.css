@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #171717;
+  --background: #f7f1e8;
+  --foreground: #3a2517;
+
+  /* Marrom (marca) — botões, links, estados ativos */
+  --color-brand-50: #fbf6f0;
+  --color-brand-100: #f3e7d8;
+  --color-brand-200: #e6cdae;
+  --color-brand-300: #d4ac7d;
+  --color-brand-400: #be8a57;
+  --color-brand-500: #a06b3d;
+  --color-brand-600: #7c5231;
+  --color-brand-700: #603e27;
+  --color-brand-800: #4a2f1f;
+  --color-brand-900: #3a2517;
+
+  /* Bege (fundo) — cards, painéis, superfícies */
+  --color-sand-50: #fdfbf8;
+  --color-sand-100: #f7f1e8;
+  --color-sand-200: #efe4d3;
+  --color-sand-300: #e3d2b8;
 }
 
 @theme inline {
@@ -10,9 +28,30 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+
+  --color-sand-50: var(--color-sand-50);
+  --color-sand-100: var(--color-sand-100);
+  --color-sand-200: var(--color-sand-200);
+  --color-sand-300: var(--color-sand-300);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
 }

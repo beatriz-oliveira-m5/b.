@@ -35,16 +35,16 @@ export default async function ConteudoPage({
 
   return (
     <div className="max-w-3xl">
-      <Link href="/calendario" className="mb-4 inline-block text-sm text-neutral-500 hover:underline">
+      <Link href="/calendario" className="mb-4 inline-block text-sm text-stone-500 hover:underline">
         ← Voltar para o calendário
       </Link>
 
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="text-sm text-neutral-500">{client?.name}</p>
-          <h1 className="text-xl font-semibold text-neutral-900">{item.title}</h1>
+          <p className="text-sm text-stone-500">{client?.name}</p>
+          <h1 className="text-xl font-semibold text-stone-900">{item.title}</h1>
           {item.scheduled_at && (
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-stone-500">
               Publicar em {format(new Date(item.scheduled_at), "d 'de' MMMM 'às' HH:mm", { locale: ptBR })}
             </p>
           )}
@@ -64,8 +64,8 @@ export default async function ConteudoPage({
         <ContentEditForm key={`${item.id}-${item.caption ?? ""}`} item={item} />
       </div>
 
-      <div className="rounded-2xl border border-neutral-200 bg-white p-6">
-        <h2 className="mb-4 text-sm font-semibold text-neutral-900">Gerar legenda com IA</h2>
+      <div className="rounded-2xl border border-stone-200 bg-white p-6">
+        <h2 className="mb-4 text-sm font-semibold text-stone-900">Gerar legenda com IA</h2>
         <CaptionGenerator
           contentId={item.id}
           networks={item.networks}

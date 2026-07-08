@@ -21,7 +21,7 @@ export function SyncButton({ clientId }: { clientId: string }) {
             }
           });
         }}
-        className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium hover:bg-neutral-50 disabled:opacity-50"
+        className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium hover:bg-stone-50 disabled:opacity-50"
       >
         {isPending ? "Sincronizando..." : "Sincronizar métricas agora"}
       </button>

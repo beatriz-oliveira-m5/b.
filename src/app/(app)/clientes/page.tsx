@@ -14,14 +14,14 @@ export default async function ClientesPage() {
     <div className="max-w-3xl">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-neutral-900">Clientes</h1>
-          <p className="text-sm text-neutral-500">Os clientes ativos da agência.</p>
+          <h1 className="text-xl font-semibold text-stone-900">Clientes</h1>
+          <p className="text-sm text-stone-500">Os clientes ativos da agência.</p>
         </div>
         <NewClientForm />
       </div>
 
       {clients?.length === 0 && (
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-stone-500">
           Nenhum cliente cadastrado ainda. Clique em &quot;Novo cliente&quot; para começar.
         </p>
       )}
@@ -31,15 +31,15 @@ export default async function ClientesPage() {
           <li key={client.id}>
             <Link
               href={`/clientes/${client.id}`}
-              className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition hover:border-neutral-300 hover:shadow-sm"
+              className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 transition hover:border-stone-300 hover:shadow-sm"
             >
               <span
                 className="h-3 w-3 shrink-0 rounded-full"
                 style={{ backgroundColor: client.color }}
               />
-              <span className="font-medium text-neutral-900">{client.name}</span>
+              <span className="font-medium text-stone-900">{client.name}</span>
               {client.notes && (
-                <span className="ml-auto truncate text-sm text-neutral-400">{client.notes}</span>
+                <span className="ml-auto truncate text-sm text-stone-400">{client.notes}</span>
               )}
             </Link>
           </li>

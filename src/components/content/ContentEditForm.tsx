@@ -31,23 +31,23 @@ export function ContentEditForm({ item }: { item: ContentItem }) {
           }
         });
       }}
-      className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6"
+      className="flex flex-col gap-4 rounded-2xl border border-stone-200 bg-white p-6"
     >
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Título</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Título</label>
         <input
           name="title"
           defaultValue={item.title}
           required
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Redes</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Redes</label>
         <div className="flex flex-wrap gap-3">
           {ALL_NETWORKS.map((n) => (
-            <label key={n} className="flex items-center gap-1.5 text-sm text-neutral-700">
+            <label key={n} className="flex items-center gap-1.5 text-sm text-stone-700">
               <input
                 type="checkbox"
                 name="networks"
@@ -61,25 +61,25 @@ export function ContentEditForm({ item }: { item: ContentItem }) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">
+        <label className="mb-1 block text-sm font-medium text-stone-700">
           Data e hora de publicação
         </label>
         <input
           type="datetime-local"
           name="scheduled_at"
           defaultValue={toLocalInputValue(item.scheduled_at)}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Legenda</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Legenda</label>
         <textarea
           name="caption"
           rows={6}
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
@@ -89,7 +89,7 @@ export function ContentEditForm({ item }: { item: ContentItem }) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
           {isPending ? "Salvando..." : "Salvar alterações"}
         </button>

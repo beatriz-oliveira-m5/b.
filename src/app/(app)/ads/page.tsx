@@ -25,8 +25,8 @@ export default async function AdsPage() {
     <div className="max-w-3xl">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-neutral-900">Ads</h1>
-          <p className="text-sm text-neutral-500">
+          <h1 className="text-xl font-semibold text-stone-900">Ads</h1>
+          <p className="text-sm text-stone-500">
             Campanhas via Meta Marketing API (Instagram/Facebook). Sem conta de anúncios aprovada,
             o impulsionamento fica em modo de teste.
           </p>
@@ -37,14 +37,14 @@ export default async function AdsPage() {
       <div className="flex flex-col gap-3">
         {campaigns?.map((campaign) => (
           <div key={campaign.id}>
-            <p className="mb-1 text-xs text-neutral-400">{clientById.get(campaign.client_id)?.name}</p>
+            <p className="mb-1 text-xs text-stone-400">{clientById.get(campaign.client_id)?.name}</p>
             <CampaignRow campaign={campaign} />
           </div>
         ))}
       </div>
 
       {(!campaigns || campaigns.length === 0) && (
-        <p className="text-sm text-neutral-500">Nenhuma campanha ainda.</p>
+        <p className="text-sm text-stone-500">Nenhuma campanha ainda.</p>
       )}
     </div>
   );

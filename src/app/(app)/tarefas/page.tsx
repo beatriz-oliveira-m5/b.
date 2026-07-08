@@ -15,8 +15,8 @@ export default async function TarefasPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="mb-1 text-xl font-semibold text-neutral-900">Tarefas</h1>
-      <p className="mb-6 text-sm text-neutral-500">
+      <h1 className="mb-1 text-xl font-semibold text-stone-900">Tarefas</h1>
+      <p className="mb-6 text-sm text-stone-500">
         Pendências organizadas por cliente. Marque como feita quando concluir.
       </p>
 
@@ -30,7 +30,7 @@ export default async function TarefasPage() {
           <div key={client.id} className="mb-6">
             <div className="mb-2 flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: client.color }} />
-              <h2 className="text-sm font-semibold text-neutral-900">{client.name}</h2>
+              <h2 className="text-sm font-semibold text-stone-900">{client.name}</h2>
             </div>
             <ul className="flex flex-col gap-1.5">
               {clientTodos.map((todo) => (
@@ -42,7 +42,7 @@ export default async function TarefasPage() {
       })}
 
       {todoList.length === 0 && (
-        <p className="text-sm text-neutral-500">Nenhuma tarefa por aqui ainda.</p>
+        <p className="text-sm text-stone-500">Nenhuma tarefa por aqui ainda.</p>
       )}
     </div>
   );

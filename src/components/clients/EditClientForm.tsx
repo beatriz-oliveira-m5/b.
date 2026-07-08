@@ -22,30 +22,30 @@ export function EditClientForm({ client }: { client: Client }) {
           }
         });
       }}
-      className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6"
+      className="flex flex-col gap-4 rounded-2xl border border-stone-200 bg-white p-6"
     >
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Nome</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Nome</label>
         <input
           name="name"
           defaultValue={client.name}
           required
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Cor no calendário</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Cor no calendário</label>
         <input type="color" name="color" defaultValue={client.color} className="h-9 w-16" />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Notas</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Notas</label>
         <textarea
           name="notes"
           defaultValue={client.notes ?? ""}
           rows={3}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
@@ -55,7 +55,7 @@ export function EditClientForm({ client }: { client: Client }) {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
           {isPending ? "Salvando..." : "Salvar"}
         </button>

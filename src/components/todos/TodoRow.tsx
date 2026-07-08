@@ -9,7 +9,7 @@ export function TodoRow({ todo }: { todo: Todo }) {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <li className="flex items-center gap-3 rounded-lg border border-neutral-200 bg-white px-3 py-2">
+    <li className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white px-3 py-2">
       <input
         type="checkbox"
         checked={todo.done}
@@ -17,15 +17,15 @@ export function TodoRow({ todo }: { todo: Todo }) {
         onChange={(e) => startTransition(() => toggleTodo(todo.id, e.target.checked))}
         className="h-4 w-4"
       />
-      <span className={`flex-1 text-sm ${todo.done ? "text-neutral-400 line-through" : "text-neutral-800"}`}>
+      <span className={`flex-1 text-sm ${todo.done ? "text-stone-400 line-through" : "text-stone-800"}`}>
         {todo.title}
       </span>
       {todo.due_date && (
-        <span className="text-xs text-neutral-400">{format(parseISO(todo.due_date), "dd/MM")}</span>
+        <span className="text-xs text-stone-400">{format(parseISO(todo.due_date), "dd/MM")}</span>
       )}
       <button
         onClick={() => startTransition(() => deleteTodo(todo.id))}
-        className="text-xs text-neutral-400 hover:text-red-600"
+        className="text-xs text-stone-400 hover:text-red-600"
       >
         remover
       </button>

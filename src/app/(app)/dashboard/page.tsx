@@ -24,8 +24,8 @@ export default async function DashboardPage({
   if (!activeClientId) {
     return (
       <div>
-        <h1 className="mb-2 text-xl font-semibold text-neutral-900">Relatórios</h1>
-        <p className="text-sm text-neutral-500">Cadastre um cliente primeiro na aba Clientes.</p>
+        <h1 className="mb-2 text-xl font-semibold text-stone-900">Relatórios</h1>
+        <p className="text-sm text-stone-500">Cadastre um cliente primeiro na aba Clientes.</p>
       </div>
     );
   }
@@ -63,14 +63,14 @@ export default async function DashboardPage({
     <div className="max-w-4xl">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-neutral-900">Relatórios</h1>
-          <p className="text-sm text-neutral-500">Performance dos últimos 30 dias, por rede.</p>
+          <h1 className="text-xl font-semibold text-stone-900">Relatórios</h1>
+          <p className="text-sm text-stone-500">Performance dos últimos 30 dias, por rede.</p>
         </div>
         <ClientSelector clients={clients ?? []} activeClientId={activeClientId} />
       </div>
 
       {byNetwork.size === 0 ? (
-        <p className="mb-6 text-sm text-neutral-500">
+        <p className="mb-6 text-sm text-stone-500">
           Nenhuma métrica ainda. Vá em Redes sociais e clique em &quot;Sincronizar métricas
           agora&quot; para este cliente.
         </p>

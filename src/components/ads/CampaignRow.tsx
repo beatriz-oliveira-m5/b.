@@ -18,15 +18,15 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3">
+    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3">
       <NetworkBadge network={campaign.network} />
-      <span className="text-sm font-medium text-neutral-800">
+      <span className="text-sm font-medium text-stone-800">
         {campaign.objective ?? "Campanha sem objetivo definido"}
       </span>
-      <span className="text-xs text-neutral-400">
+      <span className="text-xs text-stone-400">
         R$ {((campaign.budget_cents ?? 0) / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
       </span>
-      <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs font-medium text-neutral-600">
+      <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600">
         {STATUS_LABELS[campaign.status]}
       </span>
       {campaign.source === "mock" && (
@@ -49,7 +49,7 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
                 }
               });
             }}
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+            className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700 disabled:opacity-50"
           >
             Impulsionar
           </button>
@@ -58,7 +58,7 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
           <button
             disabled={isPending}
             onClick={() => startTransition(() => updateAdCampaignStatus(campaign.id, "paused"))}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium hover:bg-neutral-50 disabled:opacity-50"
+            className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium hover:bg-stone-50 disabled:opacity-50"
           >
             Pausar
           </button>
@@ -67,7 +67,7 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
           <button
             disabled={isPending}
             onClick={() => startTransition(() => updateAdCampaignStatus(campaign.id, "active"))}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium hover:bg-neutral-50 disabled:opacity-50"
+            className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium hover:bg-stone-50 disabled:opacity-50"
           >
             Reativar
           </button>
@@ -75,7 +75,7 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
         <button
           disabled={isPending}
           onClick={() => startTransition(() => deleteAdCampaign(campaign.id))}
-          className="text-xs text-neutral-400 hover:text-red-600"
+          className="text-xs text-stone-400 hover:text-red-600"
         >
           excluir
         </button>

@@ -25,7 +25,7 @@ export function CaptionGenerator({
 
   if (networks.length === 0) {
     return (
-      <p className="text-sm text-neutral-500">
+      <p className="text-sm text-stone-500">
         Selecione ao menos uma rede social acima e salve para poder gerar legendas com IA.
       </p>
     );
@@ -34,17 +34,17 @@ export function CaptionGenerator({
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Tema do post</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Tema do post</label>
         <input
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           placeholder="Ex: promoção de dia das mães, bastidores da produção..."
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Tom de voz</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Tom de voz</label>
         <div className="flex flex-wrap gap-2">
           {TONE_SUGGESTIONS.map((t) => (
             <button
@@ -52,7 +52,7 @@ export function CaptionGenerator({
               type="button"
               onClick={() => setTone(t)}
               className={`rounded-full px-3 py-1 text-xs font-medium ${
-                tone === t ? "bg-indigo-600 text-white" : "bg-neutral-100 text-neutral-600"
+                tone === t ? "bg-brand-600 text-white" : "bg-stone-100 text-stone-600"
               }`}
             >
               {t}
@@ -77,7 +77,7 @@ export function CaptionGenerator({
             }
           });
         }}
-        className="self-start rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+        className="self-start rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
       >
         {isPending ? "Gerando..." : "Gerar legendas com IA"}
       </button>
@@ -88,13 +88,13 @@ export function CaptionGenerator({
             <div
               key={c.id}
               className={`rounded-xl border p-3 ${
-                c.selected ? "border-indigo-400 bg-indigo-50" : "border-neutral-200"
+                c.selected ? "border-brand-400 bg-brand-50" : "border-stone-200"
               }`}
             >
-              <p className="mb-1 text-xs font-medium text-neutral-500">
+              <p className="mb-1 text-xs font-medium text-stone-500">
                 {NETWORK_LABELS[c.network]}
               </p>
-              <p className="mb-2 whitespace-pre-wrap text-sm text-neutral-800">
+              <p className="mb-2 whitespace-pre-wrap text-sm text-stone-800">
                 {c.generated_text}
               </p>
               <button
@@ -108,7 +108,7 @@ export function CaptionGenerator({
                     router.refresh();
                   });
                 }}
-                className="text-xs font-medium text-indigo-600 hover:underline"
+                className="text-xs font-medium text-brand-600 hover:underline"
               >
                 Usar esta legenda
               </button>

@@ -31,15 +31,15 @@ export function NewContentForm({
           }
         });
       }}
-      className="flex max-w-xl flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6"
+      className="flex max-w-xl flex-col gap-4 rounded-2xl border border-stone-200 bg-white p-6"
     >
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Cliente</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Cliente</label>
         <select
           name="client_id"
           required
           defaultValue={defaultClientId ?? ""}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         >
           <option value="" disabled>
             Selecione um cliente
@@ -53,20 +53,20 @@ export function NewContentForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Título</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Título</label>
         <input
           name="title"
           required
           placeholder="Ex: Reels de bastidores"
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">Redes</label>
+        <label className="mb-1 block text-sm font-medium text-stone-700">Redes</label>
         <div className="flex flex-wrap gap-3">
           {ALL_NETWORKS.map((n) => (
-            <label key={n} className="flex items-center gap-1.5 text-sm text-neutral-700">
+            <label key={n} className="flex items-center gap-1.5 text-sm text-stone-700">
               <input type="checkbox" name="networks" value={n} />
               {NETWORK_LABELS[n]}
             </label>
@@ -75,24 +75,24 @@ export function NewContentForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">
+        <label className="mb-1 block text-sm font-medium text-stone-700">
           Data e hora de publicação
         </label>
         <input
           type="datetime-local"
           name="scheduled_at"
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-neutral-700">
+        <label className="mb-1 block text-sm font-medium text-stone-700">
           Legenda (opcional agora — pode gerar com IA depois)
         </label>
         <textarea
           name="caption"
           rows={4}
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
       </div>
 
@@ -101,7 +101,7 @@ export function NewContentForm({
       <button
         type="submit"
         disabled={isPending}
-        className="self-start rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+        className="self-start rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
       >
         {isPending ? "Criando..." : "Criar rascunho"}
       </button>

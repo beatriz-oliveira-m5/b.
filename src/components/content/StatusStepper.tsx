@@ -34,10 +34,10 @@ export function StatusStepper({
             onClick={() => moveTo(s)}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
               active
-                ? "bg-indigo-600 text-white"
+                ? "bg-brand-600 text-white"
                 : done
-                  ? "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-                  : "bg-neutral-100 text-neutral-500 hover:bg-neutral-200"
+                  ? "bg-brand-100 text-brand-700 hover:bg-brand-200"
+                  : "bg-stone-100 text-stone-500 hover:bg-stone-200"
             }`}
           >
             {STATUS_LABELS[s]}
