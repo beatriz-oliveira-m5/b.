@@ -1,21 +1,26 @@
 // Tipos manuais espelhando supabase/migrations/20260708000001_init.sql.
 // Se o schema mudar, atualize aqui junto (ou rode `supabase gen types typescript`
 // contra o projeto real e substitua este arquivo).
+//
+// Importante: usar `type` (não `interface`) nos shapes de linha — o
+// postgrest-js exige que `Row extends Record<string, unknown>`, e uma
+// `interface` não satisfaz esse constraint (vira `never` silenciosamente),
+// enquanto um `type` alias satisfaz.
 
 export type ContentNetwork = "instagram" | "facebook" | "tiktok" | "linkedin" | "youtube";
 export type ContentStatus = "draft" | "in_review" | "approved" | "published";
 export type IntegrationMode = "mock" | "real";
 
-export interface Client {
+export type Client = {
   id: string;
   name: string;
   color: string;
   notes: string | null;
   archived: boolean;
   created_at: string;
-}
+};
 
-export interface SocialChannel {
+export type SocialChannel = {
   id: string;
   client_id: string;
   network: ContentNetwork;
@@ -27,9 +32,9 @@ export interface SocialChannel {
   token_expires_at: string | null;
   connected_at: string | null;
   created_at: string;
-}
+};
 
-export interface ContentItem {
+export type ContentItem = {
   id: string;
   client_id: string;
   title: string;
@@ -42,18 +47,18 @@ export interface ContentItem {
   review_notes: string | null;
   created_at: string;
   updated_at: string;
-}
+};
 
-export interface ContentStatusHistory {
+export type ContentStatusHistory = {
   id: string;
   content_item_id: string;
   from_status: ContentStatus | null;
   to_status: ContentStatus;
   note: string | null;
   changed_at: string;
-}
+};
 
-export interface Todo {
+export type Todo = {
   id: string;
   client_id: string;
   content_item_id: string | null;
@@ -62,9 +67,9 @@ export interface Todo {
   due_date: string | null;
   done: boolean;
   created_at: string;
-}
+};
 
-export interface AiCaption {
+export type AiCaption = {
   id: string;
   content_item_id: string | null;
   network: ContentNetwork;
@@ -73,9 +78,9 @@ export interface AiCaption {
   generated_text: string;
   selected: boolean;
   created_at: string;
-}
+};
 
-export interface PerformanceMetric {
+export type PerformanceMetric = {
   id: string;
   client_id: string;
   content_item_id: string | null;
@@ -91,9 +96,9 @@ export interface PerformanceMetric {
   engagement_rate: number | null;
   source: IntegrationMode;
   fetched_at: string;
-}
+};
 
-export interface AdsCampaign {
+export type AdsCampaign = {
   id: string;
   client_id: string;
   content_item_id: string | null;
@@ -106,9 +111,9 @@ export interface AdsCampaign {
   ends_at: string | null;
   source: IntegrationMode;
   created_at: string;
-}
+};
 
-export interface Benchmark {
+export type Benchmark = {
   id: string;
   network: ContentNetwork;
   metric_name: string;
@@ -116,43 +121,32 @@ export interface Benchmark {
   benchmark_value: number;
   unit: string;
   updated_at: string;
-}
+};
 
-export interface Database {
+type Table<Row, Insert = Partial<Row>, Update = Partial<Row>> = {
+  Row: Row;
+  Insert: Insert;
+  Update: Update;
+  Relationships: [];
+};
+
+export type Database = {
   public: {
     Tables: {
-      clients: { Row: Client; Insert: Partial<Client>; Update: Partial<Client> };
-      social_channels: {
-        Row: SocialChannel;
-        Insert: Partial<SocialChannel>;
-        Update: Partial<SocialChannel>;
-      };
-      content_items: {
-        Row: ContentItem;
-        Insert: Partial<ContentItem>;
-        Update: Partial<ContentItem>;
-      };
-      content_status_history: {
-        Row: ContentStatusHistory;
-        Insert: Partial<ContentStatusHistory>;
-        Update: Partial<ContentStatusHistory>;
-      };
-      todos: { Row: Todo; Insert: Partial<Todo>; Update: Partial<Todo> };
-      ai_captions: { Row: AiCaption; Insert: Partial<AiCaption>; Update: Partial<AiCaption> };
-      performance_metrics: {
-        Row: PerformanceMetric;
-        Insert: Partial<PerformanceMetric>;
-        Update: Partial<PerformanceMetric>;
-      };
-      ads_campaigns: {
-        Row: AdsCampaign;
-        Insert: Partial<AdsCampaign>;
-        Update: Partial<AdsCampaign>;
-      };
-      benchmarks: { Row: Benchmark; Insert: Partial<Benchmark>; Update: Partial<Benchmark> };
+      clients: Table<Client>;
+      social_channels: Table<SocialChannel>;
+      content_items: Table<ContentItem>;
+      content_status_history: Table<ContentStatusHistory>;
+      todos: Table<Todo>;
+      ai_captions: Table<AiCaption>;
+      performance_metrics: Table<PerformanceMetric>;
+      ads_campaigns: Table<AdsCampaign>;
+      benchmarks: Table<Benchmark>;
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
   };
-}
+};
 
 export const NETWORK_LABELS: Record<ContentNetwork, string> = {
   instagram: "Instagram",
