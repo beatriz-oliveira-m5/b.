@@ -42,7 +42,7 @@ export default async function ConteudoPage({
       <div className="mb-4 flex items-center justify-between">
         <div>
           <p className="text-sm text-stone-500">{client?.name}</p>
-          <h1 className="text-xl font-semibold text-stone-900">{item.title}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-stone-900">{item.title}</h1>
           {item.scheduled_at && (
             <p className="text-sm text-stone-500">
               Publicar em {format(new Date(item.scheduled_at), "d 'de' MMMM 'às' HH:mm", { locale: ptBR })}
@@ -64,7 +64,7 @@ export default async function ConteudoPage({
         <ContentEditForm key={`${item.id}-${item.caption ?? ""}`} item={item} />
       </div>
 
-      <div className="rounded-2xl border border-stone-200 bg-white p-6">
+      <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-sm font-semibold text-stone-900">Gerar legenda com IA</h2>
         <CaptionGenerator
           contentId={item.id}

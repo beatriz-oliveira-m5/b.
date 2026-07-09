@@ -101,7 +101,7 @@ export default async function CalendarioPage({
         }
       />
 
-      <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-stone-200 bg-white">
+      <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
         {WEEKDAY_LABELS.map((label) => (
           <div
             key={label}
@@ -120,12 +120,12 @@ export default async function CalendarioPage({
           return (
             <div
               key={key}
-              className={`min-h-28 border-b border-r border-stone-100 p-1.5 last:border-r-0 ${
+              className={`min-h-32 border-b border-r border-stone-100 p-2 last:border-r-0 ${
                 today ? "bg-brand-50/60" : inMonth ? "bg-white" : "bg-stone-50/50"
               }`}
             >
               <p
-                className={`mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs ${
+                className={`mb-1.5 inline-flex h-6 w-6 items-center justify-center rounded-full text-xs ${
                   today
                     ? "bg-brand-600 font-semibold text-white"
                     : inMonth
@@ -135,24 +135,24 @@ export default async function CalendarioPage({
               >
                 {format(day, "d")}
               </p>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 {dayItems.map((item) => {
                   const client = clientById.get(item.client_id);
                   return (
                     <Link
                       key={item.id}
                       href={`/conteudo/${item.id}`}
-                      className="block rounded-md border border-stone-200 bg-white px-1.5 py-1 text-xs transition hover:border-brand-300 hover:shadow-sm"
+                      className="block rounded-lg border border-stone-200 bg-white px-2 py-1.5 text-xs shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
                     >
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1.5">
                         <span
                           className="h-1.5 w-1.5 shrink-0 rounded-full"
                           style={{ backgroundColor: client?.color ?? "#a3a3a3" }}
                         />
                         <span className="truncate font-medium text-stone-800">{item.title}</span>
                       </span>
-                      <span className="mt-0.5 inline-block">
-                        <StatusBadge status={item.status} />
+                      <span className="mt-1 inline-block">
+                        <StatusBadge status={item.status} compact />
                       </span>
                     </Link>
                   );

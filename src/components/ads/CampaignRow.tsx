@@ -18,7 +18,7 @@ export function CampaignRow({ campaign }: { campaign: AdsCampaign }) {
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3">
+    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 shadow-sm">
       <NetworkBadge network={campaign.network} />
       <span className="text-sm font-medium text-stone-800">
         {campaign.objective ?? "Campanha sem objetivo definido"}

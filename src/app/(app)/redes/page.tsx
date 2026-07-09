@@ -1,3 +1,4 @@
+import { Share2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ChannelRow } from "@/components/channels/ChannelRow";
 import { SyncButton } from "@/components/channels/SyncButton";
@@ -34,7 +35,7 @@ export default async function RedesPage({
       {clients?.map((client) => {
         const clientChannels = (channels ?? []).filter((c) => c.client_id === client.id);
         return (
-          <div key={client.id} className="mb-6 rounded-2xl border border-stone-200 bg-white p-5">
+          <div key={client.id} className="mb-6 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
             <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span
@@ -60,7 +61,7 @@ export default async function RedesPage({
 
       {(!clients || clients.length === 0) && (
         <EmptyState
-          icon="◎"
+          icon={<Share2 size={24} strokeWidth={1.75} />}
           title="Cadastre um cliente para conectar as redes"
           description="Crie o primeiro cliente na aba Clientes — depois volte aqui para conectar Instagram, Facebook, TikTok, LinkedIn e YouTube."
         />

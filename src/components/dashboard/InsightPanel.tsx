@@ -9,7 +9,7 @@ export function InsightPanel({ clientId }: { clientId: string }) {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="rounded-2xl border border-stone-200 bg-white p-5">
+    <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="text-sm font-semibold text-stone-900">Insights de IA</h2>
         <button

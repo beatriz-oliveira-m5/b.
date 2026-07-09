@@ -17,7 +17,7 @@ export function MetricsCard({
   const aboveBenchmark = benchmarkRate != null && engagementRate >= benchmarkRate;
 
   return (
-    <div className="rounded-2xl border border-stone-200 bg-white p-4">
+    <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <NetworkBadge network={network} />
         {source === "mock" && (

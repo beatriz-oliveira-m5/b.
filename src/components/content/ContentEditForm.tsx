@@ -31,7 +31,7 @@ export function ContentEditForm({ item }: { item: ContentItem }) {
           }
         });
       }}
-      className="flex flex-col gap-4 rounded-2xl border border-stone-200 bg-white p-6"
+      className="flex flex-col gap-4 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
     >
       <div>
         <label className="mb-1 block text-sm font-medium text-stone-700">Título</label>

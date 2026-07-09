@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Users } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { NewClientForm } from "./NewClientForm";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -22,7 +23,7 @@ export default async function ClientesPage() {
 
       {clients?.length === 0 && (
         <EmptyState
-          icon="◆"
+          icon={<Users size={24} strokeWidth={1.75} />}
           title="Nenhum cliente cadastrado ainda"
           description="Cadastre o primeiro cliente da agência para começar a organizar o calendário, as tarefas e os relatórios."
         />
@@ -33,7 +34,7 @@ export default async function ClientesPage() {
           <li key={client.id}>
             <Link
               href={`/clientes/${client.id}`}
-              className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 transition hover:border-brand-300 hover:shadow-sm"
+              className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 shadow-sm transition hover:border-brand-300 hover:shadow-md"
             >
               <span
                 className="h-3 w-3 shrink-0 rounded-full ring-2 ring-white"

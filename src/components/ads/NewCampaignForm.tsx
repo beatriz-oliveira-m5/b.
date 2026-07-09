@@ -42,7 +42,7 @@ export function NewCampaignForm({
           }
         });
       }}
-      className="mb-6 flex flex-col gap-3 rounded-2xl border border-stone-200 bg-white p-5"
+      className="mb-6 flex flex-col gap-3 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
     >
       <div>
         <label className="mb-1 block text-xs font-medium text-stone-500">Cliente</label>

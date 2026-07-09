@@ -1,3 +1,4 @@
+import { CheckSquare, ListChecks } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TodoForm } from "@/components/todos/TodoForm";
 import { TodoRow } from "@/components/todos/TodoRow";
@@ -24,7 +25,7 @@ export default async function TarefasPage() {
 
       {clientList.length === 0 ? (
         <EmptyState
-          icon="✓"
+          icon={<CheckSquare size={24} strokeWidth={1.75} />}
           title="Cadastre um cliente para começar"
           description="As tarefas são organizadas por cliente — crie o primeiro cliente na aba Clientes antes de adicionar pendências."
         />
@@ -56,7 +57,7 @@ export default async function TarefasPage() {
 
           {todoList.length === 0 && (
             <EmptyState
-              icon="✓"
+              icon={<ListChecks size={24} strokeWidth={1.75} />}
               title="Nenhuma tarefa por aqui ainda"
               description="Use o formulário acima para adicionar a primeira pendência de um cliente."
             />

@@ -23,7 +23,7 @@ export function TodoForm({ clients, defaultClientId }: { clients: Client[]; defa
           }
         });
       }}
-      className="mb-6 flex flex-wrap items-end gap-2 rounded-xl border border-stone-200 bg-white p-4"
+      className="mb-6 flex flex-wrap items-end gap-2 rounded-xl border border-stone-200 bg-white p-4 shadow-sm"
     >
       <div className="flex-1 min-w-[160px]">
         <label className="mb-1 block text-xs font-medium text-stone-500">Cliente</label>

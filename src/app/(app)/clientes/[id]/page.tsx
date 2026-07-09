@@ -33,7 +33,7 @@ export default async function ClienteDetalhePage({
         ← Voltar para clientes
       </Link>
 
-      <h1 className="mb-1 text-xl font-semibold text-stone-900">{client.name}</h1>
+      <h1 className="mb-1 text-2xl font-semibold tracking-tight text-stone-900">{client.name}</h1>
       <p className="mb-6 text-sm text-stone-500">
         {pendingTodos ?? 0} tarefa(s) pendente(s) · {upcomingPosts ?? 0} post(s) em andamento
       </p>

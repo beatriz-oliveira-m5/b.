@@ -39,7 +39,7 @@ export function NewClientForm() {
           }
         });
       }}
-      className="mb-6 rounded-2xl border border-stone-200 bg-white p-5"
+      className="mb-6 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
     >
       <input type="hidden" name="color" value={color} />
       <div className="mb-3 flex gap-3">

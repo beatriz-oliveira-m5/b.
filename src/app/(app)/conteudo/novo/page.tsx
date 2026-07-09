@@ -16,7 +16,7 @@ export default async function NovoConteudoPage({
 
   return (
     <div>
-      <h1 className="mb-6 text-xl font-semibold text-stone-900">Novo post</h1>
+      <h1 className="mb-6 text-2xl font-semibold tracking-tight text-stone-900">Novo post</h1>
       <NewContentForm clients={clients ?? []} defaultClientId={cliente} />
     </div>
   );

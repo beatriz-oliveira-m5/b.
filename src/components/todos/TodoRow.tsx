@@ -9,7 +9,7 @@ export function TodoRow({ todo }: { todo: Todo }) {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <li className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white px-3 py-2">
+    <li className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white px-3 py-2 shadow-sm">
       <input
         type="checkbox"
         checked={todo.done}

@@ -1,3 +1,4 @@
+import { Megaphone } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { NewCampaignForm } from "@/components/ads/NewCampaignForm";
 import { CampaignRow } from "@/components/ads/CampaignRow";
@@ -42,7 +43,7 @@ export default async function AdsPage() {
 
       {(!campaigns || campaigns.length === 0) && (
         <EmptyState
-          icon="▲"
+          icon={<Megaphone size={24} strokeWidth={1.75} />}
           title="Nenhuma campanha ainda"
           description={
             clients && clients.length > 0

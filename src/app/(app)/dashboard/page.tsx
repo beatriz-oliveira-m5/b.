@@ -1,3 +1,4 @@
+import { BarChart3, LineChart } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { InsightPanel } from "@/components/dashboard/InsightPanel";
@@ -28,7 +29,7 @@ export default async function DashboardPage({
       <div className="max-w-4xl">
         <PageHeader title="Relatórios" description="Performance dos últimos 30 dias, por rede." />
         <EmptyState
-          icon="▤"
+          icon={<BarChart3 size={24} strokeWidth={1.75} />}
           title="Cadastre um cliente para ver relatórios"
           description="Crie o primeiro cliente na aba Clientes para começar a acompanhar o desempenho das redes sociais."
         />
@@ -76,7 +77,7 @@ export default async function DashboardPage({
       {byNetwork.size === 0 ? (
         <div className="mb-6">
           <EmptyState
-            icon="▤"
+            icon={<LineChart size={24} strokeWidth={1.75} />}
             title="Nenhuma métrica ainda"
             description='Vá em Redes sociais e clique em "Sincronizar métricas agora" para este cliente.'
           />
