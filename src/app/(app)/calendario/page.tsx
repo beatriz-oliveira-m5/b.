@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { monthGrid, parseMonthParam, dayKey, monthParam, WEEKDAY_LABELS } from "@/lib/calendar";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { addMonths, format, isSameMonth, isToday, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -49,63 +50,62 @@ export default async function CalendarioPage({
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-stone-900 capitalize">
-            {format(reference, "MMMM yyyy", { locale: ptBR })}
-          </h1>
-          <p className="text-sm text-stone-500">Calendário de conteúdo de todos os clientes.</p>
-        </div>
+      <PageHeader
+        title={format(reference, "MMMM yyyy", { locale: ptBR }).replace(/^\w/, (c) => c.toUpperCase())}
+        description="Calendário de conteúdo de todos os clientes."
+        action={
+          <>
+            <form action="/calendario" className="flex items-center gap-2">
+              <input type="hidden" name="month" value={monthParam(reference)} />
+              <select
+                name="cliente"
+                defaultValue={cliente ?? ""}
+                className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm outline-none focus:border-brand-400"
+              >
+                <option value="">Todos os clientes</option>
+                {clients?.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="submit"
+                className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
+              >
+                Filtrar
+              </button>
+            </form>
 
-        <div className="flex items-center gap-2">
-          <form action="/calendario" className="flex items-center gap-2">
-            <input type="hidden" name="month" value={monthParam(reference)} />
-            <select
-              name="cliente"
-              defaultValue={cliente ?? ""}
-              className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm"
-            >
-              <option value="">Todos os clientes</option>
-              {clients?.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
+            <Link
+              href={qs(prevMonth)}
+              aria-label="Mês anterior"
               className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
             >
-              Filtrar
-            </button>
-          </form>
-
-          <Link
-            href={qs(prevMonth)}
-            className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
-          >
-            ←
-          </Link>
-          <Link
-            href={qs(nextMonth)}
-            className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
-          >
-            →
-          </Link>
-          <Link
-            href={`/conteudo/novo${cliente ? `?cliente=${cliente}` : ""}`}
-            className="rounded-lg bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
-          >
-            + Novo post
-          </Link>
-        </div>
-      </div>
+              ←
+            </Link>
+            <Link
+              href={qs(nextMonth)}
+              aria-label="Próximo mês"
+              className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
+            >
+              →
+            </Link>
+            <Link
+              href={`/conteudo/novo${cliente ? `?cliente=${cliente}` : ""}`}
+              className="whitespace-nowrap rounded-lg bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
+            >
+              + Novo post
+            </Link>
+          </>
+        }
+      />
 
       <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-stone-200 bg-white">
         {WEEKDAY_LABELS.map((label) => (
           <div
             key={label}
-            className="border-b border-stone-200 bg-brand-50 px-2 py-2 text-center text-xs font-medium text-brand-700"
+            className="border-b border-stone-200 bg-brand-50 px-2 py-2 text-center text-xs font-semibold uppercase tracking-wide text-brand-700"
           >
             {label}
           </div>
@@ -142,18 +142,18 @@ export default async function CalendarioPage({
                     <Link
                       key={item.id}
                       href={`/conteudo/${item.id}`}
-                      className="block rounded-md border border-stone-200 px-1.5 py-1 text-xs hover:border-stone-300 hover:shadow-sm"
+                      className="block rounded-md border border-stone-200 bg-white px-1.5 py-1 text-xs transition hover:border-brand-300 hover:shadow-sm"
                     >
                       <span className="flex items-center gap-1">
                         <span
                           className="h-1.5 w-1.5 shrink-0 rounded-full"
                           style={{ backgroundColor: client?.color ?? "#a3a3a3" }}
                         />
-                        <span className="truncate font-medium text-stone-800">
-                          {item.title}
-                        </span>
+                        <span className="truncate font-medium text-stone-800">{item.title}</span>
                       </span>
-                      <StatusBadge status={item.status} />
+                      <span className="mt-0.5 inline-block">
+                        <StatusBadge status={item.status} />
+                      </span>
                     </Link>
                   );
                 })}

@@ -53,7 +53,7 @@ export default async function ClienteDetalhePage({
         </Link>
         <Link
           href={`/conteudo/novo?cliente=${id}`}
-          className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-50"
+          className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
         >
           + Novo post
         </Link>

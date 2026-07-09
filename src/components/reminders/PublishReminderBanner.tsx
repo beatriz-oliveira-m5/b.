@@ -22,28 +22,37 @@ export async function PublishReminderBanner() {
   const clientNameById = new Map((clients ?? []).map((c) => [c.id, c.name]));
 
   return (
-    <div className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4">
-      <p className="mb-2 text-sm font-semibold text-amber-900">
-        {due.length === 1 ? "1 post está pronto para publicar" : `${due.length} posts estão prontos para publicar`}
-      </p>
-      <ul className="flex flex-col gap-1">
-        {due.map((item) => (
-          <li key={item.id} className="text-sm text-amber-800">
-            <Link href={`/conteudo/${item.id}`} className="hover:underline">
-              {clientNameById.get(item.client_id)} — {item.title}
-            </Link>
-            {item.scheduled_at && (
-              <span className="text-amber-600">
-                {" "}
-                (previsto para {format(new Date(item.scheduled_at), "d 'de' MMM 'às' HH:mm", { locale: ptBR })})
-              </span>
-            )}
-          </li>
-        ))}
-      </ul>
-      <p className="mt-2 text-xs text-amber-700">
-        Lembrete: a publicação é manual — poste direto em cada rede e depois marque como &quot;Publicado&quot;.
-      </p>
+    <div className="mb-6 flex gap-3 rounded-xl border border-brand-200 bg-brand-50 py-4 pl-4 pr-5">
+      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-semibold text-white">
+        !
+      </div>
+      <div>
+        <p className="mb-1.5 text-sm font-semibold text-brand-900">
+          {due.length === 1
+            ? "1 post está pronto para publicar"
+            : `${due.length} posts estão prontos para publicar`}
+        </p>
+        <ul className="flex flex-col gap-1">
+          {due.map((item) => (
+            <li key={item.id} className="text-sm text-brand-800">
+              <Link href={`/conteudo/${item.id}`} className="font-medium hover:underline">
+                {clientNameById.get(item.client_id)} — {item.title}
+              </Link>
+              {item.scheduled_at && (
+                <span className="text-brand-500">
+                  {" "}
+                  (previsto para{" "}
+                  {format(new Date(item.scheduled_at), "d 'de' MMM 'às' HH:mm", { locale: ptBR })})
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 text-xs text-brand-500">
+          Lembrete: a publicação é manual — poste direto em cada rede e depois marque como
+          &quot;Publicado&quot;.
+        </p>
+      </div>
     </div>
   );
 }

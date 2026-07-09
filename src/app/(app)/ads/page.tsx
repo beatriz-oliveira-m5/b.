@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { NewCampaignForm } from "@/components/ads/NewCampaignForm";
 import { CampaignRow } from "@/components/ads/CampaignRow";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export default async function AdsPage() {
   const supabase = await createClient();
@@ -23,16 +25,11 @@ export default async function AdsPage() {
 
   return (
     <div className="max-w-3xl">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold text-stone-900">Ads</h1>
-          <p className="text-sm text-stone-500">
-            Campanhas via Meta Marketing API (Instagram/Facebook). Sem conta de anúncios aprovada,
-            o impulsionamento fica em modo de teste.
-          </p>
-        </div>
-        <NewCampaignForm clients={clients ?? []} contentItems={contentItems ?? []} />
-      </div>
+      <PageHeader
+        title="Ads"
+        description="Campanhas via Meta Marketing API (Instagram/Facebook). Sem conta de anúncios aprovada, o impulsionamento fica em modo de teste."
+        action={<NewCampaignForm clients={clients ?? []} contentItems={contentItems ?? []} />}
+      />
 
       <div className="flex flex-col gap-3">
         {campaigns?.map((campaign) => (
@@ -44,7 +41,15 @@ export default async function AdsPage() {
       </div>
 
       {(!campaigns || campaigns.length === 0) && (
-        <p className="text-sm text-stone-500">Nenhuma campanha ainda.</p>
+        <EmptyState
+          icon="▲"
+          title="Nenhuma campanha ainda"
+          description={
+            clients && clients.length > 0
+              ? 'Clique em "+ Nova campanha" para criar a primeira campanha de impulsionamento.'
+              : "Cadastre um cliente na aba Clientes antes de criar uma campanha."
+          }
+        />
       )}
     </div>
   );

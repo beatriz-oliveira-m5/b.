@@ -55,3 +55,32 @@ body {
   background: var(--color-brand-200);
   color: var(--color-brand-900);
 }
+
+/* Controles nativos do navegador (checkbox, radio, date/color picker)
+   herdam a cor de marca em vez do azul padrão do sistema. */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-brand-600);
+}
+
+input[type="color"] {
+  border: 1px solid var(--color-sand-300);
+  border-radius: 0.5rem;
+  padding: 2px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-300);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-400);
+}

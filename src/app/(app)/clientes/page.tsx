@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { NewClientForm } from "./NewClientForm";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export default async function ClientesPage() {
   const supabase = await createClient();
@@ -12,18 +14,18 @@ export default async function ClientesPage() {
 
   return (
     <div className="max-w-3xl">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold text-stone-900">Clientes</h1>
-          <p className="text-sm text-stone-500">Os clientes ativos da agência.</p>
-        </div>
-        <NewClientForm />
-      </div>
+      <PageHeader
+        title="Clientes"
+        description="Os clientes ativos da agência."
+        action={<NewClientForm />}
+      />
 
       {clients?.length === 0 && (
-        <p className="text-sm text-stone-500">
-          Nenhum cliente cadastrado ainda. Clique em &quot;Novo cliente&quot; para começar.
-        </p>
+        <EmptyState
+          icon="◆"
+          title="Nenhum cliente cadastrado ainda"
+          description="Cadastre o primeiro cliente da agência para começar a organizar o calendário, as tarefas e os relatórios."
+        />
       )}
 
       <ul className="flex flex-col gap-2">
@@ -31,10 +33,10 @@ export default async function ClientesPage() {
           <li key={client.id}>
             <Link
               href={`/clientes/${client.id}`}
-              className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 transition hover:border-stone-300 hover:shadow-sm"
+              className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 transition hover:border-brand-300 hover:shadow-sm"
             >
               <span
-                className="h-3 w-3 shrink-0 rounded-full"
+                className="h-3 w-3 shrink-0 rounded-full ring-2 ring-white"
                 style={{ backgroundColor: client.color }}
               />
               <span className="font-medium text-stone-900">{client.name}</span>

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { LogoutButton } from "./LogoutButton";
 
 const NAV_ITEMS = [
-  { href: "/calendario", label: "Calendário", icon: "📅" },
+  { href: "/calendario", label: "Calendário", icon: "▦" },
   { href: "/tarefas", label: "Tarefas", icon: "✓" },
   { href: "/clientes", label: "Clientes", icon: "◆" },
   { href: "/redes", label: "Redes sociais", icon: "◎" },
@@ -23,25 +23,28 @@ export function Sidebar() {
           B
         </div>
         <div>
-          <p className="text-sm font-semibold text-sand-50">Agência B</p>
+          <p className="text-sm font-semibold text-white">Agência B</p>
           <p className="text-[11px] text-brand-300">painel interno</p>
         </div>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1">
+      <nav className="flex flex-1 flex-col gap-0.5">
         {NAV_ITEMS.map((item) => {
           const active = pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition ${
+              className={`relative flex items-center gap-2.5 rounded-lg py-2 pl-3 pr-3 text-sm font-medium transition ${
                 active
-                  ? "bg-brand-700 text-white"
-                  : "text-brand-200 hover:bg-brand-800 hover:text-sand-50"
+                  ? "bg-brand-600 text-white shadow-sm"
+                  : "text-brand-100 hover:bg-brand-800 hover:text-white"
               }`}
             >
-              <span className="text-xs opacity-80">{item.icon}</span>
+              {active && (
+                <span className="absolute left-0 top-1/2 h-4 w-1 -translate-y-1/2 rounded-r-full bg-sand-100" />
+              )}
+              <span className="w-4 text-center text-xs">{item.icon}</span>
               {item.label}
             </Link>
           );

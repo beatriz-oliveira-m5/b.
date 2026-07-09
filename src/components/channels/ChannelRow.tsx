@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { connectMockChannel, disconnectChannel } from "@/lib/actions/channels";
-import { NETWORK_LABELS, type ContentNetwork, type SocialChannel } from "@/lib/types/database";
+import { NetworkBadge } from "@/components/ui/NetworkBadge";
+import type { ContentNetwork, SocialChannel } from "@/lib/types/database";
 
 export function ChannelRow({
   clientId,
@@ -31,25 +32,26 @@ export function ChannelRow({
 
   return (
     <div className="flex flex-wrap items-center gap-3 border-b border-stone-100 py-3 last:border-0">
-      <span className="w-24 text-sm font-medium text-stone-800">{NETWORK_LABELS[network]}</span>
+      <span className="w-28 shrink-0">
+        <NetworkBadge network={network} />
+      </span>
       <span className={`w-48 text-xs font-medium ${statusColor}`}>{statusLabel}</span>
 
-      {channel && (
-        <span className="text-xs text-stone-400">{channel.handle}</span>
-      )}
+      {channel && <span className="text-xs text-stone-400">{channel.handle}</span>}
 
       <div className="ml-auto flex items-center gap-2">
         {!channel && !showMockForm && (
           <>
             <button
               onClick={() => setShowMockForm(true)}
-              className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium hover:bg-stone-50"
+              className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700"
             >
               Conectar com dados de teste
             </button>
             <a
               href={`/api/integrations/${network}/connect?client_id=${clientId}`}
-              className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700"
+              className="rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"
+              title="Só funciona depois do app review dessa rede ser aprovado"
             >
               Conectar de verdade
             </a>
@@ -62,7 +64,7 @@ export function ChannelRow({
               value={handle}
               onChange={(e) => setHandle(e.target.value)}
               placeholder="@usuario"
-              className="w-32 rounded-lg border border-stone-300 px-2 py-1.5 text-xs"
+              className="w-32 rounded-lg border border-stone-300 px-2 py-1.5 text-xs outline-none focus:border-brand-400"
             />
             <button
               disabled={isPending}
@@ -72,7 +74,7 @@ export function ChannelRow({
                   setShowMockForm(false);
                 })
               }
-              className="rounded-lg bg-amber-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-600 disabled:opacity-50"
+              className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700 disabled:opacity-50"
             >
               Salvar
             </button>

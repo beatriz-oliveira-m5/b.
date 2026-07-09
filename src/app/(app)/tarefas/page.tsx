@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { TodoForm } from "@/components/todos/TodoForm";
 import { TodoRow } from "@/components/todos/TodoRow";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export default async function TarefasPage() {
   const supabase = await createClient();
@@ -15,34 +17,51 @@ export default async function TarefasPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="mb-1 text-xl font-semibold text-stone-900">Tarefas</h1>
-      <p className="mb-6 text-sm text-stone-500">
-        Pendências organizadas por cliente. Marque como feita quando concluir.
-      </p>
+      <PageHeader
+        title="Tarefas"
+        description="Pendências organizadas por cliente. Marque como feita quando concluir."
+      />
 
-      <TodoForm clients={clientList} />
+      {clientList.length === 0 ? (
+        <EmptyState
+          icon="✓"
+          title="Cadastre um cliente para começar"
+          description="As tarefas são organizadas por cliente — crie o primeiro cliente na aba Clientes antes de adicionar pendências."
+        />
+      ) : (
+        <>
+          <TodoForm clients={clientList} />
 
-      {clientList.map((client) => {
-        const clientTodos = todoList.filter((t) => t.client_id === client.id);
-        if (clientTodos.length === 0) return null;
+          {clientList.map((client) => {
+            const clientTodos = todoList.filter((t) => t.client_id === client.id);
+            if (clientTodos.length === 0) return null;
 
-        return (
-          <div key={client.id} className="mb-6">
-            <div className="mb-2 flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: client.color }} />
-              <h2 className="text-sm font-semibold text-stone-900">{client.name}</h2>
-            </div>
-            <ul className="flex flex-col gap-1.5">
-              {clientTodos.map((todo) => (
-                <TodoRow key={todo.id} todo={todo} />
-              ))}
-            </ul>
-          </div>
-        );
-      })}
+            return (
+              <div key={client.id} className="mb-6">
+                <div className="mb-2 flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: client.color }}
+                  />
+                  <h2 className="text-sm font-semibold text-stone-900">{client.name}</h2>
+                </div>
+                <ul className="flex flex-col gap-1.5">
+                  {clientTodos.map((todo) => (
+                    <TodoRow key={todo.id} todo={todo} />
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
 
-      {todoList.length === 0 && (
-        <p className="text-sm text-stone-500">Nenhuma tarefa por aqui ainda.</p>
+          {todoList.length === 0 && (
+            <EmptyState
+              icon="✓"
+              title="Nenhuma tarefa por aqui ainda"
+              description="Use o formulário acima para adicionar a primeira pendência de um cliente."
+            />
+          )}
+        </>
       )}
     </div>
   );

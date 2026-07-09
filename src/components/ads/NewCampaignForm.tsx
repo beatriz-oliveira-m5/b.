@@ -20,7 +20,7 @@ export function NewCampaignForm({
     return (
       <button
         onClick={() => setOpen(true)}
-        className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+        className="whitespace-nowrap rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
       >
         + Nova campanha
       </button>

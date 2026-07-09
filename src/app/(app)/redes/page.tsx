@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { ChannelRow } from "@/components/channels/ChannelRow";
 import { SyncButton } from "@/components/channels/SyncButton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { NETWORK_LABELS, type ContentNetwork } from "@/lib/types/database";
 
 const ALL_NETWORKS = Object.keys(NETWORK_LABELS) as ContentNetwork[];
@@ -20,11 +22,10 @@ export default async function RedesPage({
 
   return (
     <div className="max-w-3xl">
-      <h1 className="mb-1 text-xl font-semibold text-stone-900">Redes sociais</h1>
-      <p className="mb-6 text-sm text-stone-500">
-        Status da conexão de cada cliente com cada rede. Enquanto o app review de uma rede não sai,
-        conecte com &quot;dados de teste&quot; para o resto do sistema já funcionar.
-      </p>
+      <PageHeader
+        title="Redes sociais"
+        description='Status da conexão de cada cliente com cada rede. Enquanto o app review de uma rede não sai, conecte com "dados de teste" para o resto do sistema já funcionar.'
+      />
 
       {erro && (
         <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{erro}</p>
@@ -58,7 +59,11 @@ export default async function RedesPage({
       })}
 
       {(!clients || clients.length === 0) && (
-        <p className="text-sm text-stone-500">Cadastre um cliente primeiro na aba Clientes.</p>
+        <EmptyState
+          icon="◎"
+          title="Cadastre um cliente para conectar as redes"
+          description="Crie o primeiro cliente na aba Clientes — depois volte aqui para conectar Instagram, Facebook, TikTok, LinkedIn e YouTube."
+        />
       )}
     </div>
   );

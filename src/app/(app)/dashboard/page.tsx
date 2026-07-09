@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { InsightPanel } from "@/components/dashboard/InsightPanel";
 import { ClientSelector } from "@/components/dashboard/ClientSelector";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { isoDateDaysAgo } from "@/lib/dates";
 import type { ContentNetwork, IntegrationMode } from "@/lib/types/database";
 
@@ -23,9 +25,13 @@ export default async function DashboardPage({
 
   if (!activeClientId) {
     return (
-      <div>
-        <h1 className="mb-2 text-xl font-semibold text-stone-900">Relatórios</h1>
-        <p className="text-sm text-stone-500">Cadastre um cliente primeiro na aba Clientes.</p>
+      <div className="max-w-4xl">
+        <PageHeader title="Relatórios" description="Performance dos últimos 30 dias, por rede." />
+        <EmptyState
+          icon="▤"
+          title="Cadastre um cliente para ver relatórios"
+          description="Crie o primeiro cliente na aba Clientes para começar a acompanhar o desempenho das redes sociais."
+        />
       </div>
     );
   }
@@ -61,19 +67,20 @@ export default async function DashboardPage({
 
   return (
     <div className="max-w-4xl">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold text-stone-900">Relatórios</h1>
-          <p className="text-sm text-stone-500">Performance dos últimos 30 dias, por rede.</p>
-        </div>
-        <ClientSelector clients={clients ?? []} activeClientId={activeClientId} />
-      </div>
+      <PageHeader
+        title="Relatórios"
+        description="Performance dos últimos 30 dias, por rede."
+        action={<ClientSelector clients={clients ?? []} activeClientId={activeClientId} />}
+      />
 
       {byNetwork.size === 0 ? (
-        <p className="mb-6 text-sm text-stone-500">
-          Nenhuma métrica ainda. Vá em Redes sociais e clique em &quot;Sincronizar métricas
-          agora&quot; para este cliente.
-        </p>
+        <div className="mb-6">
+          <EmptyState
+            icon="▤"
+            title="Nenhuma métrica ainda"
+            description='Vá em Redes sociais e clique em "Sincronizar métricas agora" para este cliente.'
+          />
+        </div>
       ) : (
         <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {Array.from(byNetwork.entries()).map(([network, v]) => (
