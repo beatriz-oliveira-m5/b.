@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { connectMockChannel, disconnectChannel } from "@/lib/actions/channels";
-import { NetworkBadge } from "@/components/ui/NetworkBadge";
-import type { ContentNetwork, SocialChannel } from "@/lib/types/database";
+import { NETWORK_ICON, NETWORK_CARD_BG } from "@/lib/networkStyle";
+import { NETWORK_LABELS, type ContentNetwork, type SocialChannel } from "@/lib/types/database";
 
 export function ChannelRow({
   clientId,
@@ -30,10 +30,17 @@ export function ChannelRow({
       ? "text-emerald-600"
       : "text-amber-600";
 
+  const Icon = NETWORK_ICON[network];
+
   return (
     <div className="flex flex-wrap items-center gap-3 border-b border-stone-100 py-3 last:border-0">
-      <span className="w-28 shrink-0">
-        <NetworkBadge network={network} />
+      <span className="flex w-32 shrink-0 items-center gap-2">
+        <span
+          className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white ${NETWORK_CARD_BG[network]}`}
+        >
+          <Icon size={12} />
+        </span>
+        <span className="text-sm font-medium text-stone-700">{NETWORK_LABELS[network]}</span>
       </span>
       <span className={`w-48 text-xs font-medium ${statusColor}`}>{statusLabel}</span>
 

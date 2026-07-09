@@ -1,3 +1,4 @@
+import { NETWORK_ICON } from "@/lib/networkStyle";
 import { NETWORK_LABELS, type ContentNetwork } from "@/lib/types/database";
 
 const NETWORK_STYLES: Record<ContentNetwork, string> = {
@@ -9,10 +10,12 @@ const NETWORK_STYLES: Record<ContentNetwork, string> = {
 };
 
 export function NetworkBadge({ network }: { network: ContentNetwork }) {
+  const Icon = NETWORK_ICON[network];
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${NETWORK_STYLES[network]}`}
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${NETWORK_STYLES[network]}`}
     >
+      <Icon size={11} />
       {NETWORK_LABELS[network]}
     </span>
   );

@@ -1,5 +1,6 @@
-import { NetworkBadge } from "@/components/ui/NetworkBadge";
-import type { ContentNetwork } from "@/lib/types/database";
+import { ArrowUp, ArrowDown } from "lucide-react";
+import { NETWORK_ICON, NETWORK_CARD_BG } from "@/lib/networkStyle";
+import { NETWORK_LABELS, type ContentNetwork } from "@/lib/types/database";
 
 export function MetricsCard({
   network,
@@ -15,28 +16,38 @@ export function MetricsCard({
   source: "mock" | "real";
 }) {
   const aboveBenchmark = benchmarkRate != null && engagementRate >= benchmarkRate;
+  const Icon = NETWORK_ICON[network];
 
   return (
-    <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
-      <div className="mb-3 flex items-center justify-between">
-        <NetworkBadge network={network} />
+    <div className={`relative overflow-hidden rounded-2xl p-4 text-white shadow-md ${NETWORK_CARD_BG[network]}`}>
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+          <Icon size={16} />
+        </div>
         {source === "mock" && (
-          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-medium text-amber-700">
+          <span className="rounded-full bg-black/25 px-2 py-0.5 text-[10px] font-medium">
             dados de teste
           </span>
         )}
       </div>
 
-      <p className="text-2xl font-semibold text-stone-900">{reach.toLocaleString("pt-BR")}</p>
-      <p className="mb-3 text-xs text-stone-500">alcance nos últimos 30 dias</p>
+      <p className="text-xs font-medium text-white/70">{NETWORK_LABELS[network]}</p>
+      <div className="flex items-end gap-1.5">
+        <p className="text-2xl font-bold leading-tight">{reach.toLocaleString("pt-BR")}</p>
+        {benchmarkRate != null &&
+          (aboveBenchmark ? (
+            <ArrowUp size={16} className="mb-1 text-emerald-300" />
+          ) : (
+            <ArrowDown size={16} className="mb-1 text-red-300" />
+          ))}
+      </div>
+      <p className="mb-3 text-[11px] text-white/60">alcance nos últimos 30 dias</p>
 
-      <div className="flex items-center gap-2 text-sm">
-        <span className="font-medium text-stone-800">{engagementRate.toFixed(2)}%</span>
-        <span className="text-stone-400">engajamento</span>
+      <div className="flex items-center gap-1.5 border-t border-white/15 pt-2 text-xs">
+        <span className="font-semibold">{engagementRate.toFixed(2)}%</span>
+        <span className="text-white/60">engajamento</span>
         {benchmarkRate != null && (
-          <span className={aboveBenchmark ? "text-emerald-600" : "text-red-500"}>
-            {aboveBenchmark ? "▲" : "▼"} benchmark {benchmarkRate}%
-          </span>
+          <span className="ml-auto text-white/60">benchmark {benchmarkRate}%</span>
         )}
       </div>
     </div>
