@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { StatusStepper } from "@/components/content/StatusStepper";
 import { ContentEditForm } from "@/components/content/ContentEditForm";
 import { CaptionGenerator } from "@/components/content/CaptionGenerator";
+import { ShareLinkButton } from "@/components/content/ShareLinkButton";
 import { NetworkBadge } from "@/components/ui/NetworkBadge";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -56,9 +57,17 @@ export default async function ConteudoPage({
         </div>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
         <StatusStepper contentId={item.id} status={item.status} />
+        <ShareLinkButton token={item.share_token} />
       </div>
+
+      {item.review_notes && (
+        <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+          <p className="text-xs font-medium text-amber-800">Ajuste pedido pelo cliente:</p>
+          <p className="text-sm text-amber-900">{item.review_notes}</p>
+        </div>
+      )}
 
       <div className="mb-6">
         <ContentEditForm key={`${item.id}-${item.caption ?? ""}`} item={item} />

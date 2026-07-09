@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { createMetaCampaign } from "@/lib/integrations/real/meta-ads";
+import { createMetaCampaign, fetchMetaCampaignInsights } from "@/lib/integrations/real/meta-ads";
+import { generateMockAdMetrics } from "@/lib/integrations/ad-metrics-mock";
 import type { ContentNetwork } from "@/lib/types/database";
 
 export async function createAdCampaign(formData: FormData) {
@@ -89,6 +90,44 @@ export async function updateAdCampaignStatus(
 ) {
   const supabase = await createClient();
   const { error } = await supabase.from("ads_campaigns").update({ status }).eq("id", campaignId);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/ads");
+}
+
+/** Puxa os resultados (gasto, impressões, cliques) da campanha — via Meta
+ * Marketing API quando o canal é real, ou uma estimativa quando é mock. */
+export async function syncAdMetrics(campaignId: string) {
+  const supabase = await createClient();
+
+  const { data: campaign } = await supabase
+    .from("ads_campaigns")
+    .select("*")
+    .eq("id", campaignId)
+    .single();
+  if (!campaign) throw new Error("Campanha não encontrada.");
+
+  let metrics: { spend_cents: number; impressions: number; clicks: number; results: number };
+
+  if (campaign.source === "real" && campaign.external_campaign_id) {
+    const { data: channel } = await supabase
+      .from("social_channels")
+      .select("*")
+      .eq("client_id", campaign.client_id)
+      .eq("network", campaign.network)
+      .single();
+    if (!channel) throw new Error("Canal não encontrado para essa campanha.");
+    metrics = await fetchMetaCampaignInsights(channel, campaign.external_campaign_id);
+  } else {
+    metrics = generateMockAdMetrics(campaignId, campaign.budget_cents ?? 0);
+  }
+
+  const { error } = await supabase.from("ad_metrics").insert({
+    campaign_id: campaignId,
+    metric_date: new Date().toISOString().slice(0, 10),
+    ...metrics,
+    source: campaign.source,
+  });
   if (error) throw new Error(error.message);
 
   revalidatePath("/ads");

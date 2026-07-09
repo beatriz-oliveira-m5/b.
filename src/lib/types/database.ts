@@ -10,6 +10,7 @@
 export type ContentNetwork = "instagram" | "facebook" | "tiktok" | "linkedin" | "youtube";
 export type ContentStatus = "draft" | "in_review" | "approved" | "published";
 export type IntegrationMode = "mock" | "real";
+export type TeamRole = "admin" | "editor";
 
 export type Client = {
   id: string;
@@ -45,6 +46,7 @@ export type ContentItem = {
   scheduled_at: string | null;
   published_at: string | null;
   review_notes: string | null;
+  share_token: string;
   created_at: string;
   updated_at: string;
 };
@@ -123,6 +125,46 @@ export type Benchmark = {
   updated_at: string;
 };
 
+export type TeamMember = {
+  id: string;
+  user_id: string;
+  name: string;
+  email: string;
+  role: TeamRole;
+  created_at: string;
+};
+
+export type Competitor = {
+  id: string;
+  client_id: string;
+  network: ContentNetwork;
+  handle: string;
+  created_at: string;
+};
+
+export type CompetitorMetric = {
+  id: string;
+  competitor_id: string;
+  metric_date: string;
+  followers_count: number | null;
+  posts_count: number | null;
+  avg_engagement_rate: number | null;
+  source: IntegrationMode;
+  fetched_at: string;
+};
+
+export type AdMetric = {
+  id: string;
+  campaign_id: string;
+  metric_date: string;
+  spend_cents: number;
+  impressions: number;
+  clicks: number;
+  results: number;
+  source: IntegrationMode;
+  fetched_at: string;
+};
+
 type Table<Row, Insert = Partial<Row>, Update = Partial<Row>> = {
   Row: Row;
   Insert: Insert;
@@ -142,6 +184,10 @@ export type Database = {
       performance_metrics: Table<PerformanceMetric>;
       ads_campaigns: Table<AdsCampaign>;
       benchmarks: Table<Benchmark>;
+      team_members: Table<TeamMember>;
+      competitors: Table<Competitor>;
+      competitor_metrics: Table<CompetitorMetric>;
+      ad_metrics: Table<AdMetric>;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

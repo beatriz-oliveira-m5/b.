@@ -99,3 +99,19 @@ aproximação razoável, não uma métrica oficial "diária" da conta.
   variáveis de ambiente estarem preenchidas.
 - Cada rede é independente: dá pra ter Instagram "real" e TikTok "mock" ao
   mesmo tempo, por exemplo.
+
+---
+
+## Análise de concorrentes — limitação diferente das outras
+
+Ao contrário do resto do sistema, a aba **Concorrência** não tem um caminho
+de "app review" pra virar real. As APIs oficiais (Graph API, etc.) só dão
+insights de contas que **você mesma gerencia** — não existe endpoint padrão
+pra puxar métricas de um perfil de terceiros só com o app aprovado.
+
+Pra ter dado de concorrente de verdade, o caminho normal do mercado é
+contratar um provedor de dados de social listening (ex: Social Blade API,
+Phyllo, ou similares) — é uma assinatura paga à parte, fora do escopo de
+"aprovação gratuita" que documentei nas outras redes. Por enquanto a aba
+gera números plausíveis (mesma lógica mock do resto do sistema) — dá pra
+trocar por um provedor real no futuro se fizer sentido pro negócio.

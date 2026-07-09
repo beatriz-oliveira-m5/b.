@@ -2,7 +2,7 @@ import { BarChart3, LineChart } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { InsightPanel } from "@/components/dashboard/InsightPanel";
-import { ClientSelector } from "@/components/dashboard/ClientSelector";
+import { ClientSelector } from "@/components/ui/ClientSelector";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { isoDateDaysAgo } from "@/lib/dates";
@@ -71,7 +71,9 @@ export default async function DashboardPage({
       <PageHeader
         title="Relatórios"
         description="Performance dos últimos 30 dias, por rede."
-        action={<ClientSelector clients={clients ?? []} activeClientId={activeClientId} />}
+        action={
+          <ClientSelector clients={clients ?? []} activeClientId={activeClientId} basePath="/dashboard" />
+        }
       />
 
       {byNetwork.size === 0 ? (

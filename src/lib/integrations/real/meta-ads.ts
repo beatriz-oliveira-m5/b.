@@ -52,3 +52,36 @@ export async function createMetaCampaign(
   const data = (await res.json()) as { id: string };
   return { externalCampaignId: data.id };
 }
+
+/** Busca os resultados (spend/impressions/clicks) de uma campanha real na
+ * Meta Marketing API, via o endpoint de insights. */
+export async function fetchMetaCampaignInsights(
+  channel: SocialChannel,
+  externalCampaignId: string
+): Promise<{ spend_cents: number; impressions: number; clicks: number; results: number }> {
+  if (!channel.access_token) {
+    throw new Error("Canal sem token de acesso — conecte a conta Meta em Redes sociais.");
+  }
+
+  const params = new URLSearchParams({
+    fields: "spend,impressions,clicks,actions",
+    access_token: channel.access_token,
+  });
+  const res = await fetch(`${GRAPH_URL}/${externalCampaignId}/insights?${params.toString()}`);
+  if (!res.ok) {
+    throw new Error(`Falha ao buscar resultados da campanha na Meta: ${await res.text()}`);
+  }
+
+  const json = (await res.json()) as {
+    data: { spend?: string; impressions?: string; clicks?: string; actions?: { value: string }[] }[];
+  };
+  const row = json.data?.[0];
+  const results = row?.actions?.reduce((sum, a) => sum + Number(a.value ?? 0), 0) ?? 0;
+
+  return {
+    spend_cents: Math.round(Number(row?.spend ?? 0) * 100),
+    impressions: Number(row?.impressions ?? 0),
+    clicks: Number(row?.clicks ?? 0),
+    results,
+  };
+}

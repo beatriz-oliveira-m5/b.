@@ -4,6 +4,7 @@ import { NewCampaignForm } from "@/components/ads/NewCampaignForm";
 import { CampaignRow } from "@/components/ads/CampaignRow";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
+import type { AdMetric } from "@/lib/types/database";
 
 export default async function AdsPage() {
   const supabase = await createClient();
@@ -24,6 +25,20 @@ export default async function AdsPage() {
 
   const clientById = new Map((clients ?? []).map((c) => [c.id, c]));
 
+  const campaignIds = (campaigns ?? []).map((c) => c.id);
+  const { data: adMetrics } = campaignIds.length
+    ? await supabase
+        .from("ad_metrics")
+        .select("*")
+        .in("campaign_id", campaignIds)
+        .order("metric_date", { ascending: false })
+    : { data: [] as AdMetric[] };
+
+  const latestMetricByCampaign = new Map<string, AdMetric>();
+  for (const m of adMetrics ?? []) {
+    if (!latestMetricByCampaign.has(m.campaign_id)) latestMetricByCampaign.set(m.campaign_id, m);
+  }
+
   return (
     <div className="max-w-3xl">
       <PageHeader
@@ -36,7 +51,7 @@ export default async function AdsPage() {
         {campaigns?.map((campaign) => (
           <div key={campaign.id}>
             <p className="mb-1 text-xs text-stone-400">{clientById.get(campaign.client_id)?.name}</p>
-            <CampaignRow campaign={campaign} />
+            <CampaignRow campaign={campaign} latestMetric={latestMetricByCampaign.get(campaign.id)} />
           </div>
         ))}
       </div>

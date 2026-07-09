@@ -9,6 +9,8 @@ import {
   Share2,
   BarChart3,
   Megaphone,
+  Target,
+  Users2,
 } from "lucide-react";
 import { LogoutButton } from "./LogoutButton";
 
@@ -17,8 +19,10 @@ const NAV_ITEMS = [
   { href: "/tarefas", label: "Tarefas", Icon: CheckSquare },
   { href: "/clientes", label: "Clientes", Icon: Users },
   { href: "/redes", label: "Redes sociais", Icon: Share2 },
+  { href: "/concorrencia", label: "Concorrência", Icon: Target },
   { href: "/dashboard", label: "Relatórios", Icon: BarChart3 },
   { href: "/ads", label: "Ads", Icon: Megaphone },
+  { href: "/equipe", label: "Equipe", Icon: Users2 },
 ];
 
 export function Sidebar() {

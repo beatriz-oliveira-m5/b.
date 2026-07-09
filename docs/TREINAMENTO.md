@@ -38,12 +38,26 @@ Todo post passa por 4 estágios, nessa ordem:
 4. **Publicado** — você já postou na rede social e marcou como feito aqui.
 
 Pra mudar o estágio, abre o post e clica no botão do estágio que quer (dentro
-de **Calendário → clique no post**). Não tem aprovação de cliente aqui dentro
-— é só pra organizar o fluxo interno da agência.
+de **Calendário → clique no post**).
 
 **Importante: o sistema NÃO publica nada sozinho.** Ele é um calendário +
 lembrete. Quando chegar a hora, você mesma posta direto no Instagram, TikTok,
 etc., e depois volta aqui pra marcar como "Publicado".
+
+### Aprovação externa (o cliente aprova sem precisar logar)
+
+Dentro de qualquer post, tem um botão **"Copiar link de aprovação do
+cliente"**. Isso copia um link único daquele post — manda pro cliente por
+WhatsApp ou email. Ele abre, vê o post e a legenda, e clica em **Aprovar** ou
+**Pedir ajustes** (escrevendo o que precisa mudar). O cliente não precisa
+criar conta nem logar em nada.
+
+- Se ele aprovar → o post já vira **Aprovado** automaticamente.
+- Se ele pedir ajuste → o post volta pra **Rascunho** e o pedido dele aparece
+  destacado em amarelo na tela do post, pra você saber o que mudar.
+
+O link só funciona enquanto o post está **"Em revisão"** — antes ou depois
+disso, quem abrir só vê um aviso ("ainda em preparação" ou "já aprovado").
 
 ---
 
@@ -136,6 +150,37 @@ Só funciona hoje pra Instagram e Facebook (é a Meta Marketing API).
    nada de verdade). Se estiver em modo real (com a conta de anúncios da
    Meta aprovada), aí sim ele cria a campanha de verdade no Gerenciador de
    Anúncios da Meta.
+4. Depois de impulsionar, clica em **"Sincronizar resultados"** de vez em
+   quando pra ver quanto foi investido, impressões, cliques e resultados.
+
+---
+
+## Concorrência
+
+Cadastre até 5 perfis concorrentes por cliente (rede + @) e acompanhe
+seguidores, quantidade de posts e engajamento deles lado a lado com o
+desempenho do seu cliente. Clica no ícone de atualizar (seta circular) em
+cada card pra puxar um novo retrato.
+
+**Importante**: hoje esses números são **estimados** (mesma lógica de "dados
+de teste" do resto do sistema) — dado de concorrente de verdade não é
+liberado por aprovação de app comum, precisa de um provedor de dados
+especializado (isso está detalhado em `docs/APP_REVIEW.md` pro seu marido).
+Serve pra ter uma noção comparativa, não é número oficial.
+
+---
+
+## Equipe
+
+Mostra quem tem login na plataforma. Só **administradoras** (você, hoje) podem
+convidar gente nova ou trocar o nível de acesso de alguém.
+
+- **Administradora**: acesso total, inclusive gerenciar a equipe.
+- **Editora**: usa o sistema normalmente (calendário, posts, clientes, etc.)
+  mas não convida nem remove ninguém.
+
+Pra convidar, clica em **"Convidar"**, preenche nome, email e nível — a
+pessoa recebe um email pra criar a senha dela.
 
 ---
 
